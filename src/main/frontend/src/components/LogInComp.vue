@@ -38,7 +38,7 @@ const submitData = async () => {
       router.push("/MuroAdmin/")
     }
     else{
-      router.push("/ProfileUser/");
+      router.push("/");
     }
     console.log(user);
   } catch (error) {

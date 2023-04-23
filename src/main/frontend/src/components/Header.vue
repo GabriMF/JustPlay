@@ -2,40 +2,40 @@
 import AuthService from '../services/AuthService.js';
 const service = new AuthService();
 
-const logout = async()=>{
+const logout = async () => {
   await service.logout()
 }
 
 </script>
 <template>
   <div class="header">
-    <a href="/" aria-current="page" class="headerLogo"></a>
+    <a href="/" aria-current="page" class="logo">
+      <img class="logoImg" src="../assets/images/justPlayLogo.png" alt="">
+    </a>
 
     <div class="menuContainer">
       <nav role="navigation" class="menuNav">
-        <router-link to="/ProfileUser" class="nav-bar__link" href=""
-          >Mis Publicaciones</router-link
-        >
-        <router-link to="/MisContactos" class="nav-bar__link" href=""
-          >Mis Contactos</router-link
-        >
-        <router-link to="/ElMuro" class="nav-bar__link" href="">El Muro</router-link>
-        <router-link @click="logout" to="/" href="">Log Out</router-link>
+        <router-link to="/" class="nav-bar__link" href="">
+          Home
+        </router-link>
+        <router-link to="/myEvents" class="nav-bar__link" href="">
+          My Events
+        </router-link>
+        <router-link to="/favoriteBands" class="nav-bar__link" href="">
+          Favorite Bands
+        </router-link>
+        <router-link @click="logout" to="/login" href="">
+          Log Out
+        </router-link>
       </nav>
 
       <nav class="menuMobile">
         <input type="checkbox" id="menu" />
         <label for="menu"> ☰ </label>
         <ul>
-          <router-link to="/ProfileUser" class="nav-bar__link" href=""
-            >Mis Publicaciones</router-link
-          >
-          <router-link to="/MisContactos" class="nav-bar__link" href=""
-          >Mis Contactos</router-link
-        >
-          <router-link to="/ElMuro" class="navLink" href=""
-            >El Muro</router-link
-          >
+          <router-link to="/ProfileUser" class="nav-bar__link" href="">Mis Publicaciones</router-link>
+          <router-link to="/MisContactos" class="nav-bar__link" href="">Mis Contactos</router-link>
+          <router-link to="/ElMuro" class="navLink" href="">El Muro</router-link>
           <router-link @click="logout" to="/" href="">LogOut</router-link>
         </ul>
       </nav>
@@ -45,12 +45,12 @@ const logout = async()=>{
 <style lang="scss" scoped>
 @use "@/scss/colors" as c;
 @use "@/scss/mixins" as m;
-@use "@/scss/fonts" ;
+@use "@/scss/fonts";
 
 .header {
-  width: 100%;
+  width: 100vw;
   position: sticky;
-  z-index:10;
+  z-index: 10;
   left: 0%;
   top: 0%;
   right: 0%;
@@ -58,20 +58,19 @@ const logout = async()=>{
   display: flex;
   height: 5rem;
   -webkit-box-pack: center;
-  justify-content: center;
-  background-color: map-get(c.$colors, "light-orange");
+  justify-content: space-between;
+  background-color: rgb(177, 5, 5);
   margin-bottom: 1px;
 
-  .headerLogo {
-    background-image: url("https://uploads-ssl.webflow.com/62e2b7b9c42bdda27c83d493/6329c1bc9e1976ae0ada64b0_somos-f5.svg");
-    background-size: contain;
-    background-position: 0% 50%;
-    background-repeat: no-repeat;
-    width: 7rem;
-    height: 2.5rem;
-    margin: auto;
-    margin-left: 1vw;
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-left: 1.5vw;
+    .logoImg {
+      height: 12vh;
+    }
   }
+
   .menuContainer {
     display: flex;
     -webkit-box-pack: justify;
@@ -86,7 +85,7 @@ const logout = async()=>{
       font-family: "openSans";
       margin-right: 1em;
 
-      
+
       @include m.mv(500px) {
         display: none;
       }
@@ -94,22 +93,24 @@ const logout = async()=>{
 
     .menuMobile {
       display: none;
+
       @include m.mv(500px) {
-        margin:auto;
+        margin: auto;
         margin-right: 1vw;
         display: block;
+
         ul {
           display: none;
         }
-        
-        input:checked ~ ul {
+
+        input:checked~ul {
           display: block;
         }
-        
+
         input {
           display: none;
         }
-        
+
         label {
           box-sizing: border-box;
           display: inline-block;

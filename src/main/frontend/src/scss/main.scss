@@ -5,15 +5,15 @@
 
 
 
-body{
-    font-family:  "openSans" ;
+body {
+    font-family: "openSans";
 
-    background-color: map-get(c.$colors,"light-orange");
+    background-color: rgb(56, 56, 56);
 
 
-.bold{
-    font-weight: bold;
-}
+    .bold {
+        font-weight: bold;
+    }
 }
 
 .router-link-exact-active {

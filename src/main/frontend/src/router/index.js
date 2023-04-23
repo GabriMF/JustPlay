@@ -7,7 +7,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'login',
       component: LogInView
     },
@@ -18,20 +18,20 @@ const router = createRouter({
     },
    
     {
-      path: '/ProfileUser',
-      name: 'ProfileUser',
-      component: () => import('../views/ProfileUserView.vue')
+      path: '/myEvents',
+      name: 'myEvents',
+      component: () => import('../views/MyEventsView.vue')
     },
     {
-      path: '/ElMuro',
-      name: 'ElMuro',
-      component: () => import('../views/ElMuroView.vue')
+      path: '/',
+      name: 'home',
+      component: () => import('../views/HomeView.vue')
 
     },
     {
-      path: '/Miscontactos',
-      name: 'Miscontactos',
-      component: () => import('../views/MisContactosView.vue')
+      path: '/favoriteBands',
+      name: 'favoriteBands',
+      component: () => import('../views/FavoriteBandsView.vue')
     },
     {
       path:'/MuroAdmin',

@@ -1,69 +1,82 @@
 <script setup>
-	import { ref, reactive, computed } from "vue";
-	import axios from "axios";
-	import ElMuroView from "./ElMuroView.vue";
+import { ref, onBeforeMount } from 'vue';
+import Header from '../components/Header.vue';
+import UserFeed from '../components/UserFeed.vue';
+import AddPublication from '../components/AddPublication.vue';
+import Search from '../components/Search.vue'
+import PostService from '../services/PostService';
+import CardProfile from '../components/CardProfile.vue';
+import bannerComp from '../components/BannerComp.vue';
 
-	const url = ref("");
-	const imageUrl = computed(() => url.value);
 
-	const onFileChange = event => {
-		const file = event.target.files[0];
-		if (file) {
-			const formData = new FormData();
-			formData.append("file", file);
-			axios({
-				method: "POST",
-				url: "http://localhost:8080/media/upload",
-				data: formData,
-				withCredentials: true
+const postService = new PostService();
 
-			})
-				.then(response => {
-					url.value = response.data.url;
-                    console.log(url.value)
-				})
-				.catch(e => {
-					console.log(e);
-				});
-		}
-	};
+let posts = ref([]);
+
+onBeforeMount(async () => {
+    await postService.fetchAllPost()
+    posts.value = postService.getPost()
+    console.log(posts.value)
+});
 </script>
 
 <template>
-	<ElMuroView />
-	<h1>Hola</h1>
-	<form
-		method="post"
-		class="form-film"
-		@submit.prevent="submit"
-	>
-		<h1 class="form-film__title">Añade un nuevo título</h1>
-		<input
-			type="text"
-			name="title"
-			placeholder="Título"
-			class="form-film__input"
-			v-model="titleModel"
-		/>
-		<input
-			type="file"
-			name="file"
-			class="file-img form-film__input"
-			@change="onFileChange"
-		/>
-		<img
-			v-if="url"
-			class="img"
-			:src="imageUrl"
-			alt=""
-		/>
-		<button type="submit">Submit</button>
-	</form>
+    <main>
+        <Header />
+        <bannerComp />
+        <!-- <UserFeed />
+        <div class="tools">
+            <Search />
+        </div>-->
+        <div class="publi">
+            <CardProfile v-for="post in posts" :post="post" />
+        </div>
+    </main>
 </template>
-<style lang="scss">
-	button {
-		background: red;
-		padding: 1em;
-		width: 50%;
-	}
+
+<style lang="scss" scoped>
+@use "@/scss/colors" as c;
+
+main {
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .publi {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1em;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tools {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90vw;
+
+        .modal-container {
+            align-self: start;
+
+            .modal {
+                background: map-get(c.$colors, "white");
+                display: flex;
+                border: 2px solid black;
+                width: 100%;
+                // padding: 2em;
+                font-size: 1.2em;
+                color: black;
+                height: 2em;
+
+                .btn-add {
+                    margin-left: 1em;
+                }
+            }
+        }
+    }
+}
 </style>

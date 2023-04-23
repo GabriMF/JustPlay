@@ -58,17 +58,17 @@ const submit = async () => {
   readOnly.value = true;
   console.log(readOnly.value);
   try {
-    store.name =  nameModel.value,
-    store.instagram = instagramModel.value,
-    store.spotify = spotifyModel.value,
-    store.youtube = youtubeModel.value,
-    store.location = locationModel.value
-      await axios({
-        method: "PUT",
-        url: "http://localhost:8080/api/profiles/update/" + store.id,
-        data: store,
-        withCredentials: true,
-      });
+    store.name = nameModel.value,
+      store.instagram = instagramModel.value,
+      store.spotify = spotifyModel.value,
+      store.youtube = youtubeModel.value,
+      store.location = locationModel.value
+    await axios({
+      method: "PUT",
+      url: "http://localhost:8080/api/profiles/update/" + store.id,
+      data: store,
+      withCredentials: true,
+    });
   } catch (error) {
     console.log("submit error" + error);
   }
@@ -93,188 +93,74 @@ onBeforeUpdate(() => {
 
 <template>
   <div class="infoUser">
-    <div class="photoAndContact">
-      <div class="photoAndButton">
-      <input
-        type="file"
-        @change="onFileChange"
-        ref="fileInput"
-        style="display: none"
-      />
-      <img
-        @click="$refs.fileInput.click()"
-        class="photoUser"
-        v-if="user.image != null"
-        :src="'http://localhost:8080/media/' + user.image"
-        alt="img"
-      />
-      <img
-        @click="$refs.fileInput.click()"
-        class="photoUser"
-        v-else
-        src="../assets/images/perfilVacio.png"
-        alt="img"
-      />
-      <button
-          v-if="readOnly == true"
-          @click="readOnly = false"
-          class="buttonEdit"
-        >
+    <div class="nameAndContact">
+      <div class="nameAndButton">
+
+        <div class="contactName">
+          <div class="name">
+            <h1 class="text">{{ nameModel }}</h1>
+            <input v-model="nameModel" v-if="modelvalue != null" modelvalue="name"
+              @update:modelValue="newValue => name = newValue" class="name" :readonly="readOnly" />
+
+            <input v-model="nameModel" v-else placeholder="Nombre" modelvalue="name"
+              @update:modelValue="newValue => name = newValue" class="name" :readonly="readOnly" />
+          </div>
+        </div>
+
+        <button v-if="readOnly == true" @click="readOnly = false" class="buttonEdit">
           EDITAR
         </button>
-        <button
-          v-if="readOnly == false"
-          @click="submit"
-          class="buttonSave"
-        >
+        <button v-if="readOnly == false" @click="submit" class="buttonSave">
           GUARDAR
         </button>
       </div>
       <div class="contacts">
-        <div class="contact">
-          <div class="nameAndinstagram">
-            <h1 class="text">{{ nameModel + " " + instagramModel}}</h1>
-          <input
-            v-model="nameModel"
-            v-if="modelvalue != null"
-            modelvalue= "name"
-            @update:modelValue="newValue => name = newValue"
-            class="name"
-            :readonly="readOnly"
-          />
-          
-          <input
-            v-model="nameModel"
-            v-else
-            placeholder="Nombre"
-            modelvalue="name"
-            @update:modelValue="newValue => name = newValue"
-            class="name"
-            :readonly="readOnly"
-          />
-         
-          <input 
-          v-model="instagramModel"
-          v-if="modelvalue != null"
-          modelvalue="instagram"
-          @update:modelValue="newValue => instagram = newValue"
-          class="name"
-          contenteditable="true"
-            :readonly="readOnly"
-          />
-          <input
-            v-model="instagramModel"
-            v-else
-            placeholder="Apellido"
-            modelvalue="instagram"
-            @update:modelValue="newValue => instagram = newValue"
-            class="instagram"
-            :readonly="readOnly"
-          />
-        </div>
-      </div>
-        <div class="contact">
-          <a class="contactUrl" target="_blank" :href="'https://spotify.com/' + store.spotify" >
-          <img
-            class="logo"
-            src="../assets/images/imagesSomosF5/spotify.png"
-            alt="spotify"
-            />
-          </a>
-          <input 
-          v-model="spotifyModel"
-          v-if="modelvalue != null"
-          modelvalue="spotify"
-          @update:modelValue="newValue => spotify = newValue"
-          class="contactsName"
-          :readonly="readOnly"
-          />
-          <input
-          v-model="spotifyModel"
-          v-else
-          placeholder="spotify"
-          modelvalue="spotify"
-          @update:modelValue="newValue => spotify = newValue"
-          class="contactsName"
-          :readonly="readOnly"
-          />
-        </div>
-        <div class="contact">
-          <a class="contactUrl" target="_blank" :href="'https://www.youtube.com/in/' + store.youtube" >
-          <img
-            class="logo"
-            src="../assets/images/imagesSomosF5/youtube.png"
-            alt="youtube"
-            />
-          </a>
-          <input
-            v-model="youtubeModel"
-            v-if="modelvalue != null"
-            modelvalue="youtube"
-            @update:modelValue="newValue => youtube = newValue"
-            class="contactsName"
-            :readonly="readOnly"
-          />
-          <input
-            v-model="youtubeModel"
-            v-else
-            placeholder="youtube"
-            modelvalue="youtube"
-            @update:modelValue="newValue => youtube = newValue"
-            class="contactsName"
-            :readonly="readOnly"
-          />
-        </div>
-        <div class="contact">
-          <div class="contactUrl">
-          <img
-            class="logo"
-            src="../assets/images/imagesSomosF5/geo-alt.png"
-            alt="geo"
-            />
-          </div>
-          <input
-            v-model="locationModel"
-            v-if="modelvalue != null"
-            modelvalue="location"
-            @update:modelValue="newValue => location = newValue"
-            class="contactsName"
-            :readonly="readOnly"
-          />
-          <input
-            v-model="locationModel"
-            v-else
-            placeholder="Location"
-            modelvalue="location"
-            @update:modelValue="newValue => location = newValue"
-            class="contactsName"
-            :readonly="readOnly"
-          />
-        </div>
-        <div class="contact">
-          <div class="contactUrl">
-          <img
-            class="logo"
-            src="../assets/images/imagesSomosF5/Vector.png"
-            alt="email"
-            />
-          </div>
-          <input
-            :value="user.username"
-            class="contactsName"
-            :readonly="true"
-          />
-        </div>
-      </div>
-    </div>
 
-    <div class="design">
-      <img
-        class="bannerDesing"
-        src="../assets/images/imagesSomosF5/banner.png"
-        alt=""
-      />
-      <button class="addContacts">AÑADIR A MIS CONTACTOS</button>
+        <div class="contact">
+          <a class="contactUrl" target="_blank" :href="'https://spotify.com/' + store.spotify">
+            <img class="logo" src="../assets/images/icons/instagramIcon.png" alt="instagram" />
+          </a>
+          <input v-model="instagramModel" v-if="modelvalue != null" modelvalue="instagram"
+            @update:modelValue="newValue => instagram = newValue" class="contactsName" :readonly="readOnly" />
+          <input v-model="instagramModel" v-else placeholder="instagram" modelvalue="instagram"
+            @update:modelValue="newValue => instagram = newValue" class="contactsName" :readonly="readOnly" />
+        </div>
+
+
+        <div class="contact">
+          <a class="contactUrl" target="_blank" :href="'https://spotify.com/' + store.spotify">
+            <img class="logo" src="../assets/images/icons/spotifyIcon.png" alt="spotify" />
+          </a>
+          <input v-model="spotifyModel" v-if="modelvalue != null" modelvalue="spotify"
+            @update:modelValue="newValue => spotify = newValue" class="contactsName" :readonly="readOnly" />
+          <input v-model="spotifyModel" v-else placeholder="spotify" modelvalue="spotify"
+            @update:modelValue="newValue => spotify = newValue" class="contactsName" :readonly="readOnly" />
+        </div>
+        <div class="contact">
+          <a class="contactUrl" target="_blank" :href="'https://www.youtube.com/in/' + store.youtube">
+            <img class="logo" src="../assets/images/icons/youtubeIconBlack.png" alt="youtube" />
+          </a>
+          <input v-model="youtubeModel" v-if="modelvalue != null" modelvalue="youtube"
+            @update:modelValue="newValue => youtube = newValue" class="contactsName" :readonly="readOnly" />
+          <input v-model="youtubeModel" v-else placeholder="youtube" modelvalue="youtube"
+            @update:modelValue="newValue => youtube = newValue" class="contactsName" :readonly="readOnly" />
+        </div>
+        <div class="contact">
+          <div class="contactUrl">
+            <img class="logo" src="../assets/images/icons/locationIcon.png" alt="location" />
+          </div>
+          <input v-model="locationModel" v-if="modelvalue != null" modelvalue="location"
+            @update:modelValue="newValue => location = newValue" class="contactsName" :readonly="readOnly" />
+          <input v-model="locationModel" v-else placeholder="Location" modelvalue="location"
+            @update:modelValue="newValue => location = newValue" class="contactsName" :readonly="readOnly" />
+        </div>
+        <div class="contact">
+          <div class="contactUrl">
+            <img class="logo" src="../assets/images/icons/emailIcon.png" alt="email" />
+          </div>
+          <input :value="user.username" class="contactsName" :readonly="true" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -285,39 +171,76 @@ onBeforeUpdate(() => {
 
 .infoUser {
   width: 100%;
-  background-color: map-get(c.$colors, "orange");
+  background-color: rgb(180, 10, 10);
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  margin-top: 1vh;
   border-radius: 5px;
 
 
-  .photoAndContact {
+  .nameAndContact {
     display: flex;
-    width: 70%;
+    flex-direction: column;
+    width: 80%;
     align-items: center;
     justify-items: right;
     margin-left: 1%;
 
-    .photoAndButton{
-      margin-right: 2%;
+    .nameAndButton {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      
-      .photoUser {
-      border-radius: 100%;
-      max-width: 120px;
-      max-height: 120px;
-      object-fit: cover;
-      width: 120px;
-      height: 120px;
-      // margin: 2%;
-      cursor: pointer;
-    }
+      width: 100%;
+
+      .contactName {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-family: "openSans";
+        margin-bottom: 0.5em;
+
+        .name {
+          width: fit-content;
+          display: inline-block;
+
+        }
+        .name {
+          width: fit-content;
+          display: inline-block;
+
+          .text {
+            color: white;
+            font-size: xx-large;
+            font-weight: bold;
+          }
+
+          .name {
+            &:read-only {
+              display: inline-block;
+              width: fit-content;
+              font-size: 1.8em;
+              color: map-get(c.$colors, "white");
+              font-family: "openSans";
+              font-weight: bold;
+              margin-left: 1%;
+              display: none;
+            }
+
+            &:read-write {
+              background-color: #FEF0DC;
+              border-radius: 5px;
+              padding: 1vh;
+              color: black;
+              margin-bottom: 2%;
+            }
+          }
+        }
+      }
+
       .buttonEdit {
         display: flex;
-        width: 70%;
+        width: 7vw;
         height: 3vh;
         align-items: center;
         border: solid;
@@ -331,40 +254,41 @@ onBeforeUpdate(() => {
         font-size: 70%;
         justify-content: center;
         text-align: center;
-        margin-top: 10%;
+
         &:hover {
-            background-color: map-get(c.$colors, "orange");
-            color: map-get(c.$colors, "white");
+          background-color: map-get(c.$colors, "orange");
+          color: map-get(c.$colors, "white");
         }
       }
+
       .buttonSave {
         display: flex;
-        width: 70%;
+        width: 8vw;
         height: 3vh;
         align-items: center;
         border: solid;
         box-sizing: border-box;
         border-radius: 50px;
         color: map-get(c.$colors, "white");
-        // background-color: map-get(c.$colors, "grey-blue");
         background-color: rgb(102, 102, 102);
         font-family: "openSans";
         font-weight: bold;
         font-size: 70%;
         justify-content: center;
         text-align: center;
-        margin-top: 10%;
+
         &:hover {
-            background-color: map-get(c.$colors, "white");
-            color: map-get(c.$colors, "black");
+          background-color: map-get(c.$colors, "white");
+          color: map-get(c.$colors, "black");
         }
       }
     }
+
     .contacts {
-      width: 80%;
+      width: 100%;
       display: flex;
-      flex-direction: column;
-      
+      justify-content: space-between;
+
       .contact {
         display: flex;
         flex-direction: row;
@@ -372,66 +296,58 @@ onBeforeUpdate(() => {
         font-family: "openSans";
         margin-bottom: 0.5em;
 
-        .nameAndinstagram{
+        .name {
           width: fit-content;
           display: inline-block;
-          
-          .text{
+
+          .text {
             color: white;
             font-size: xx-large;
             font-weight: bold;
           }
+
           .name {
-            &:read-only{
-            display: inline-block;
-            width: fit-content;
-            font-size: 1.8em;
-            color: map-get(c.$colors, "white");
-            font-family: "openSans";
-            font-weight: bold;
-            margin-left: 1%;
-            display: none;
+            &:read-only {
+              display: inline-block;
+              width: fit-content;
+              font-size: 1.8em;
+              color: map-get(c.$colors, "white");
+              font-family: "openSans";
+              font-weight: bold;
+              margin-left: 1%;
+              display: none;
             }
-            &:read-write{
+
+            &:read-write {
               background-color: #FEF0DC;
+              border-radius: 5px;
               color: black;
-              margin-bottom: 2%;
-            }
-          }
-          .instagram{
-            &:read-only{
-            display: inline-block;
-            width: fit-content;
-            font-size: 1.8em;
-            color: map-get(c.$colors, "white");
-            font-family: "openSans";
-            font-weight: bold;
-            margin-left: 1%;
-            display: none;
-            }
-            &:read-write{
-              background-color: #FEF0DC;
-              color: black;
+              margin-bottom: 2vh;
             }
           }
         }
-        .contactUrl{
+
+        .contactUrl {
           display: flex;
           flex-direction: row;
         }
+
         .logo {
-          width: 50%;
+          margin-right: 2vw;
+          width: 3vw;
         }
+
         .contactsName {
           color: white;
-
           font-size: 1em;
         }
+
         input {
           width: 100%;
           color: white;
           border: 0;
           outline: none;
+
           &:read-write {
             background-color: #FEF0DC;
             color: black;
@@ -439,36 +355,6 @@ onBeforeUpdate(() => {
             border-radius: 5px;
           }
         }
-      }
-    }
-    
-  }
-  .design {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: center;
-    align-items: center;
-    
-
-    .bannerDesing {
-      width: 80%;
-    }
-    .addContacts {
-      width: 50%;
-      border: solid;
-      box-sizing: border-box;
-      border-radius: 50px;
-      color: map-get(c.$colors, "white");
-      font-family: "openSans";
-      font-weight: bold;
-      font-size: 0.7em;
-      text-align: center;
-      margin-bottom: 1%;
-      &:hover {
-        background-color: map-get(c.$colors, "white");
-        color: map-get(c.$colors, "orange");
       }
     }
   }
