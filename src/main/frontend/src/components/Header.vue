@@ -12,6 +12,9 @@ const logout = async () => {
     <a href="/" aria-current="page" class="logo">
       <img class="logoImg" src="../assets/images/justPlayLogo.png" alt="">
     </a>
+    <div class="slogan">
+      <h1>Plug in and... Just Play!</h1>
+    </div>
 
     <div class="menuContainer">
       <nav role="navigation" class="menuNav">
@@ -69,6 +72,14 @@ const logout = async () => {
     .logoImg {
       height: 12vh;
     }
+  }
+
+  .slogan{
+    display: flex;
+    align-items: center;
+    font-size: 5vh;
+    font-weight: bolder;
+    font-style: italic;
   }
 
   .menuContainer {
