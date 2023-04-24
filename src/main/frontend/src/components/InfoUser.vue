@@ -117,7 +117,7 @@ onBeforeUpdate(() => {
       <div class="contacts">
 
         <div class="contact">
-          <a class="contactUrl" target="_blank" :href="'https://spotify.com/' + store.spotify">
+          <a class="contactUrl" target="_blank" :href="'https://instagram.com/' + store.instagram">
             <img class="logo" src="../assets/images/icons/instagramIcon.png" alt="instagram" />
           </a>
           <input v-model="instagramModel" v-if="modelvalue != null" modelvalue="instagram"
@@ -166,7 +166,6 @@ onBeforeUpdate(() => {
 </template>
 
 <style lang="scss" scoped>
-@use "@/scss/colors" as c;
 @use "@/scss/fonts";
 
 .infoUser {
@@ -220,7 +219,7 @@ onBeforeUpdate(() => {
               display: inline-block;
               width: fit-content;
               font-size: 1.8em;
-              color: map-get(c.$colors, "white");
+              color: white;
               font-family: "openSans";
               font-weight: bold;
               margin-left: 1%;
@@ -246,9 +245,9 @@ onBeforeUpdate(() => {
         border: solid;
         box-sizing: border-box;
         border-radius: 50px;
-        border-color: map-get(c.$colors, "white");
-        color: map-get(c.$colors, "orange");
-        background-color: map-get(c.$colors, "white");
+        border-color: white;
+        color: #FF4700;
+        background-color: white;
         font-family: "openSans";
         font-weight: bold;
         font-size: 70%;
@@ -256,8 +255,8 @@ onBeforeUpdate(() => {
         text-align: center;
 
         &:hover {
-          background-color: map-get(c.$colors, "orange");
-          color: map-get(c.$colors, "white");
+          background-color: #FF4700;
+          color: white;
         }
       }
 
@@ -269,7 +268,7 @@ onBeforeUpdate(() => {
         border: solid;
         box-sizing: border-box;
         border-radius: 50px;
-        color: map-get(c.$colors, "white");
+        color: white;
         background-color: rgb(102, 102, 102);
         font-family: "openSans";
         font-weight: bold;
@@ -278,8 +277,8 @@ onBeforeUpdate(() => {
         text-align: center;
 
         &:hover {
-          background-color: map-get(c.$colors, "white");
-          color: map-get(c.$colors, "black");
+          background-color: white;
+          color: black;
         }
       }
     }
@@ -311,7 +310,7 @@ onBeforeUpdate(() => {
               display: inline-block;
               width: fit-content;
               font-size: 1.8em;
-              color: map-get(c.$colors, "white");
+              color: white;
               font-family: "openSans";
               font-weight: bold;
               margin-left: 1%;

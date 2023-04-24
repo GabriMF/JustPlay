@@ -46,15 +46,17 @@ const submitData = async () => {
   }
   location.reload()
 }
-const reload = () =>{
+const reload = () => {
   location.reload()
 } 
 </script>
 
 <template>
   <div class="formBody">
-    <form @submit.prevent>
+    <div class="addPostHeader">
       <h1 class="addYourPubli">¡Añade una nueva publicación!</h1>
+    </div>
+    <form @submit.prevent>
       <input v-model="titleModel" class="title" type="text" placeholder="Titulo de tu publicación" />
       <textarea v-model="descriptionModel" class="description" placeholder="Cuentanos algo interesante..." rows="5"
         cols="46">
@@ -64,18 +66,14 @@ const reload = () =>{
         <button @click="reload" class="cancelButton">Cancelar</button>
         <button @click="submitData" class="sendButton">Publicar</button>
       </div>
-      <img class="purpleTriangle" src="../assets/images/imagesSomosF5/trianguloAzul 1.png" alt="triangulo morado">
-      <img class="greenSplash" src="../assets/images/imagesSomosF5/manchaAzul 1.png" alt="splash verde">
-
     </form>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@use "@/scss/colors" as c;
 
 .formBody {
-  background: map-get(c.$colors, "orange");
+  background: rgb(56, 56, 56);
 
   @media(min-width: 1023px) and (max-width: 1438px) {
     width: 1000px;
@@ -85,17 +83,29 @@ const reload = () =>{
     width: 1000px;
   }
 
+  .addPostHeader {
+      background-color: rgb(177, 5, 5);
+      display: flex;
+      justify-content: center;
+      width: 100%;
+
+      .addYourPubli {
+        color: white;
+        font-size: xx-large;
+        font-weight: bold;
+      }
+    }
+
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    padding: 1em;
-    height: 35em;
+    height: 80vh;
 
     .title {
-      background: white;
+      background: rgb(185, 185, 185);
       font-weight: bold;
       border-radius: 5px;
       z-index: 5;
@@ -106,7 +116,7 @@ const reload = () =>{
     }
 
     .description {
-      background: white;
+      background: rgb(185, 185, 185);
       font-weight: bold;
       border-radius: 5px;
       z-index: 5;
@@ -117,7 +127,7 @@ const reload = () =>{
     }
 
     .resources {
-      background: white;
+      background: rgb(185, 185, 185);
       font-weight: bold;
       border-radius: 5px;
       z-index: 5;
@@ -125,12 +135,6 @@ const reload = () =>{
       @media(min-width: 426px) {
         width: 55%;
       }
-    }
-
-    .addYourPubli {
-      color: white;
-      font-size: xx-large;
-      font-weight: bold;
     }
 
     .description {
@@ -143,47 +147,31 @@ const reload = () =>{
       z-index: 5;
 
       .cancelButton {
-        background-color: map-get(c.$colors, "light-purple");
+        background-color: rgb(177, 5, 5);
+        width: 8vw;
         border-radius: 2%;
-        color: map-get(c.$colors, "light-grayish");
+        color: #f2f2f2;
         margin-right: 5vw;
+        &:hover{
+          background-color: rgb(143, 4, 4);
+        }
+        &:active{
+          background-color: rgb(109, 4, 4);
+        }
       }
 
       .sendButton {
-        background-color: map-get(c.$colors, "purple");
+        background-color: rgb(92, 0, 92);
+        width: 8vw;
         border-radius: 2%;
-        color: map-get(c.$colors, "light-grayish");
+        color: #f2f2f2;
         margin-left: 5vw;
-      }
-    }
-
-    .purpleTriangle {
-      position: absolute;
-      bottom: 0;
-      right: 1em;
-      width: 9em;
-    }
-
-    .greenSplash {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 9em;
-    }
-
-    @media(max-width: 650px) {
-      .purpleTriangle {
-        position: absolute;
-        bottom: 0;
-        right: 0em;
-        width: 0em;
-      }
-
-      .greenSplash {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0em;
+        &:hover{
+          background-color: rgb(70, 0, 70);
+        }
+        &:active{
+          background-color: rgb(43, 0, 43);
+        }
       }
     }
   }
@@ -197,26 +185,26 @@ const reload = () =>{
     width: 100%;
     padding: 1em;
     height: 35em;
-    background: map-get(c.$colors, "orange");
+    background: #FF4700;
 
     .title {
       width: 100%;
       border: 2px solid grey;
-      background: white;
+      background: rgb(185, 185, 185);
       font-weight: bold;
     }
 
     .description {
       width: 100%;
       border: 2px solid grey;
-      background: white;
+      background: rgb(185, 185, 185);
       font-weight: bold;
     }
 
     .resources {
       width: 100%;
       border: 2px solid grey;
-      background: white;
+      background: rgb(185, 185, 185);
       font-weight: bold;
     }
 
@@ -237,15 +225,27 @@ const reload = () =>{
       z-index: 2;
 
       .cancelButton {
-        background-color: map-get(c.$colors, "light-purple");
+        background-color: rgb(177, 5, 5);
         border-radius: 5px;
-        color: map-get(c.$colors, "light-grayish");
+        color: #f2f2f2;
+        &:hover{
+          background-color: rgb(143, 4, 4);
+        }
+        &:active{
+          background-color: rgb(109, 4, 4);
+        }
       }
 
       .sendButton {
-        background-color: map-get(c.$colors, "purple");
+        background-color: rgb(92, 0, 92);
         border-radius: 5px;
-        color: map-get(c.$colors, "light-grayish");
+        color: #f2f2f2;
+        &:hover{
+          background-color: rgb(70, 0, 70);
+        }
+        &:active{
+          background-color: rgb(43, 0, 43);
+        }
       }
     }
   }

@@ -2,9 +2,6 @@
 import axios from 'axios';
 import { defineProps, ref } from 'vue';
 
-let random = Math.round(Math.random() * 2 + 1);
-// let image = "src/assets/images/UserNamePostBackground/background"+ random + ".png";
-
 let date = new Date().toLocaleDateString();
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -55,76 +52,82 @@ const deletePost = () => {
 
 const dialog = ref(false);
 
+// let bandName = ref()
+
+// onBeforeMount(() => {
+// 	axios({
+// 		method: "GET",
+// 		url: "http://localhost:8080/api/profiles/" + props.post.idProfile,
+// 		withCredentials: true,
+// 	})
+// 		.then((response) => {
+// 			profiles.value = response.data.name;
+// 			console.log(profiles.value);
+// 		})
+// 		.catch((e) => {
+// 			console.log(e);
+// 			console.log(props.post.idProfile);
+// 			console.log("Catch error profiles");
+// 		});
+// });
+
 </script>
 
 <template>
 	<!-- <div class="cards"> -->
 	<div class="card">
-		<div class="info">
-			<div class="headerCard">
-				<h3 class="userNamePost">
-					Rick Sanchez
-				</h3>
-				<p class="date">{{ date }}</p>
+		<div class="headerCard">
+			<h3 class="userNamePost">{{ bandName }}</h3>
+			<p class="date">{{ date }}</p>
+		</div>
+		<div class="publication">
+			<div class="text">
+				<h2 class="titlePubli">{{ post.title }}</h2>
+				<p class="textPubli">{{ post.description }}</p>
 			</div>
-			<div class="publication">
-				<div class="text">
-					<h2 class="titlePubli">{{ post.title }}</h2>
-					<p class="textPubli">{{ post.description }}</p>
-				</div>
-				<div class="picPublication">
-					<img class="filePubli" v-if="post.image" :src="'http://localhost:8080/media/' + post.image"
-						alt="imagen post" />
-				</div>
+			<div class="picPublication">
+				<img class="filePubli" v-if="post.image" :src="'http://localhost:8080/media/' + post.image"
+					alt="imagen post" />
+			</div>
+		</div>
+		<div class="buttons">
+			<v-row class="mr-1" justify="end">
+				<v-dialog class="popUp" v-model="dialog">
+					<template v-slot:activator="{ props }">
+						<v-btn class="verMasButton" variant="text" v-bind="props">
+							Ver más
+						</v-btn>
+					</template>
+					<v-card style="background-color: rgb(83, 83, 83);">
+						<v-card-title style="background-color: rgb(177, 5, 5); font-weight: bolder;">
+							<h2 class="titlePubliBigger">{{ post.title }}</h2>
+						</v-card-title>
+						<v-card-text style="background-color: grey;">
+							<p class="textPubliBigger">{{ post.description }}</p>
+							<img class="popupPic" v-if="post.image" :src="'http://localhost:8080/media/' + post.image"
+								alt="imagen post" />
+							<p class="datePopUp">{{ date }}</p>
 
-			</div>
-			<div class="buttons">
-				<v-row class="mr-1" justify="end">
-					<v-dialog class="popUp" v-model="dialog">
-						<template v-slot:activator="{ props }">
-							<v-btn class="verMasButton" variant="text" v-bind="props">
-								Ver más
+						</v-card-text>
+						<v-card-actions>
+							<v-spacer></v-spacer>
+							<v-btn class="cerrarButton" variant="text" @click="dialog = false">
+								Cerrar
 							</v-btn>
-						</template>
-						<v-card style="background-color: rgb(83, 83, 83);">
-							<v-card-title style="background-color: rgb(177, 5, 5);">
-								<h2 class="titlePubliBigger">{{ post.title }}</h2>
-							</v-card-title>
-							<v-card-text style="background-color: grey;">
-								<p class="textPubliBigger">{{ post.description }}</p>
-								<img class="popupPic" v-if="post.image" :src="'http://localhost:8080/media/' + post.image"
-									alt="imagen post" />
-								<p class="datePopUp">{{ date }}</p>
-
-							</v-card-text>
-							<v-card-actions>
-								<v-spacer></v-spacer>
-								<v-btn class="cerrarButton" variant="text" @click="dialog = false">
-									Cerrar
-								</v-btn>
-							</v-card-actions>
-						</v-card>
-					</v-dialog>
-				</v-row>
-				<!-- <button class="button-edit">
-						<i class="fa-solid fa-pen btn btn-edit"></i>
-					</button> -->
-				<button class="button-delete">
-					<i @click="deletePost" class="fa-solid fa-trash btn btn-delete"></i>
-				</button>
-			</div>
-
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
+			</v-row>
+			<button class="button-delete">
+				<i @click="deletePost" class="fa-solid fa-trash btn btn-delete"></i>
+			</button>
 		</div>
 	</div>
 	<!-- </div> -->
 </template>
 
 <style lang="scss" scoped>
-@use "@/scss/colors" as c;
 @use "@/scss/fonts";
-
-// .cards {
-// }
 
 .card {
 	display: flex;
@@ -160,14 +163,13 @@ const dialog = ref(false);
 	.publication {
 		display: flex;
 		flex-direction: column;
-		// justify-content: space-between;
 		border-radius: 5px;
 
 		.text {
 			.titlePubli {
 				margin-left: 1vw;
 				font-size: 1.5vw;
-				color: map-get(c.$colors, "black");
+				color: black;
 				font-family: "openSans";
 				font-weight: 600;
 			}
@@ -182,66 +184,9 @@ const dialog = ref(false);
 			.filePubli {
 				max-height: 20vh;
 				padding: 5px;
-
-				// &:active {
-				// 	width: 50%;
-				// }
 			}
 		}
 
-	}
-
-	.popUp {
-		width: 90vw;
-
-		.textPubliBigger {
-			font-family: "openSans";
-			padding: 0.5em;
-		}
-
-		.popupPic {
-			height: 50vh;
-		}
-
-		.datePopUp {
-			display: flex;
-			justify-content: flex-end;
-			margin-right: 2vw;
-			color: map-get(c.$colors, "grey");
-			font-family: "openSans";
-		}
-
-		.cerrarButton {
-			width: 10vw;
-			margin-right: 2vw;
-
-			&:hover {
-				background-color: #9c93b6;
-				border-radius: 5px;
-			}
-
-			&:active {
-				background-color: purple;
-				border-radius: 5px;
-			}
-		}
-	}
-
-	.v-card {
-		background-color: grey;
-	}
-
-	.v-card-title {
-		background-color: rgb(177, 5, 5);
-
-		.titlePubliBigger {
-			background-color: rgb(177, 5, 5);
-			margin-left: 1vw;
-			font-size: 1.5vw;
-			color: map-get(c.$colors, "black");
-			font-family: "openSans";
-			font-weight: 600;
-		}
 	}
 
 	.buttons {
@@ -249,38 +194,71 @@ const dialog = ref(false);
 		justify-content: flex-end;
 		margin-top: 2vh;
 
-		.verMasButton {
-			width: 8vw;
-			height: 4vh;
+		.popUp {
+			width: 90vw;
 
-			&:hover {
-				background-color: map-get(c.$colors, "light-purple");
-				border-radius: 5px;
+			.verMasButton {
+				width: 8vw;
+				height: 4vh;
+
+				&:hover {
+					background-color: #CBBFEB;
+					border-radius: 5px;
+				}
+
+				&:active {
+					background-color: purple;
+					border-radius: 5px;
+				}
 			}
 
-			&:active {
-				background-color: purple;
-				border-radius: 5px;
-			}
-		}
+			.v-card {
+				background-color: grey;
 
 
-		.button-edit {
-			margin: 0.3em;
-			width: 2em;
-			height: 2em;
-			align-items: center;
-			display: flex;
-			justify-content: center;
+				.v-card-title {
+					background-color: rgb(177, 5, 5);
 
-			&:hover {
-				background-color: map-get(c.$colors, "light-purple");
-				border-radius: 5px;
-			}
+					.titlePubliBigger {
+						background-color: rgb(177, 5, 5);
+						margin-left: 1vw;
+						font-size: 1.5vw;
+						color: black;
+						font-family: "openSans";
+					}
+				}
 
-			&:active {
-				background-color: purple;
-				border-radius: 5px;
+				.textPubliBigger {
+					font-family: "openSans";
+					padding: 0.5em;
+				}
+
+				.popupPic {
+					height: 50vh;
+				}
+
+				.datePopUp {
+					display: flex;
+					justify-content: flex-end;
+					margin-right: 2vw;
+					color: rgb(98, 98, 102);
+					font-family: "openSans";
+				}
+
+				.cerrarButton {
+					width: 10vw;
+					margin-right: 2vw;
+
+					&:hover {
+						background-color: #514c5e;
+						border-radius: 5px;
+					}
+
+					&:active {
+						background-color: purple;
+						border-radius: 5px;
+					}
+				}
 			}
 		}
 
@@ -293,7 +271,7 @@ const dialog = ref(false);
 			justify-content: center;
 
 			&:hover {
-				background-color: map-get(c.$colors, "light-purple");
+				background-color: #CBBFEB;
 				border-radius: 5px;
 			}
 
@@ -309,3 +287,4 @@ const dialog = ref(false);
 	}
 }
 </style>
+

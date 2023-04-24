@@ -33,12 +33,12 @@ const submitData = async () => {
     auth.setspotify(user.spotify);
     auth.setyoutube(user.youtube);
     auth.setIsAuthenticated();
-    
-    if(user.role == "ROLE_ADMIN"){
+
+    if (user.role == "ROLE_ADMIN") {
       router.push("/MuroAdmin/")
     }
-    else{
-      router.push("/");
+    else {
+      router.push("/home");
     }
     console.log(user);
   } catch (error) {
@@ -51,7 +51,8 @@ const submitData = async () => {
 
 <template>
   <div class="logIn">
-    <h1 class="headerForm">Bienvenido a SomosF5</h1>
+    <h1 class="headerForm">Welcome to Just Play!</h1>
+    <h2 class="headerForm2">Log in to see some shows dates, new from your groups or to post some by yourself!</h2>
     <v-sheet class="mx-auto">
       <v-form id="loginForm" @submit.prevent="submitData">
 
@@ -71,35 +72,41 @@ const submitData = async () => {
         </div>
       </v-form>
     </v-sheet>
-    <div class="designLG">
-      <img class="blueSplash" src="../assets/images/svgPics/blueSplash.svg" />
-      <img class="littleStar" src="../assets/images/svgPics/littleStar.svg" />
-      <img class="blueTriangle" src="../assets/images/svgPics/blueTriangle.svg" />
+    <div class="noAccountLink">
+      <a href="/signin">
+        No account? Don't worry! Just click here and sign up
+      </a>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-@use "@/scss/colors" as c;
 @use "@/scss/fonts";
 
 .logIn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 7vh;
+  margin-top: 2vh;
 
   .headerForm {
-    
-    background: url("../assets/images/separator1.png");
     background-size: cover;
     background-repeat: no-repeat;
-    color: map-get(c.$colors,"white");
+    color: white;
     font-family: 'openSans';
     font-weight: bold;
     font-size: 6vh;
     align-self: center;
-    margin: 2%;
+    margin-bottom: 1vh;
+  }
+
+  .headerForm2 {
+    color: white;
+    font-family: 'openSans';
+    font-weight: bold;
+    font-size: 3vh;
+    align-self: center;
+    margin-bottom: 1vh;
   }
 
   @media(max-width: 599px) {
@@ -107,7 +114,7 @@ const submitData = async () => {
       display: flex;
       justify-content: center;
       align-items: center;
-      color: map-get(c.$colors, "white");
+      color: white;
       font-family: 'openSans';
       font-weight: bold;
       font-size: 4vh;
@@ -116,18 +123,20 @@ const submitData = async () => {
 
   .v-sheet {
     width: 35vw;
+    background-color: rgb(87, 87, 87);
+    border-radius: 5px;
+    padding: 1vw;
 
     .v-form {
-      background-color: map-get(c.$colors, "orange");
 
       .v-input__control {
-        background-color: map-get(c.$colors, "white");
+        margin-top: 4vh;
+        background-color: rgb(190, 190, 190);
         border-radius: 5px;
-        z-index: 5;
       }
 
       .passwordLink {
-        color: map-get(c.$colors, "white");
+        color: white;
         display: flex;
         justify-content: center;
       }
@@ -137,9 +146,10 @@ const submitData = async () => {
         margin: auto;
 
         .v-btn {
-          color: map-get(c.$colors, "white");
-          background-color: map-get(c.$colors, "black");
-          z-index: 5;
+          color: black;
+          background-color: rgb(177, 5, 5);
+          font-weight: bolder;
+          margin-bottom: 5vh;
         }
 
         .v-btn--size-default {
@@ -149,6 +159,12 @@ const submitData = async () => {
     }
   }
 
+  .noAccountLink {
+    color: white;
+    display: flex;
+    justify-content: center;
+  }
+
   @media(max-width: 599px) {
 
     .v-sheet {
@@ -156,7 +172,6 @@ const submitData = async () => {
       margin-top: 1%;
 
       .v-form {
-        background-color: map-get(c.$colors, "orange");
         display: flex;
         flex-direction: column;
         margin: auto;
@@ -173,22 +188,21 @@ const submitData = async () => {
       margin-top: 1%;
 
       .v-form {
-        background-color: map-get(c.$colors, "orange");
         display: flex;
         flex-direction: column;
         margin: auto;
         height: 50vh;
         width: 50vw;
 
-        .v-field__field{
+        .v-field__field {
           height: 10vh;
           font-size: 3vh;
         }
 
-        .v-input__details{
+        .v-input__details {
           margin-bottom: 7vh;
 
-          .v-messages__message{
+          .v-messages__message {
             color: white;
             font-size: 2vh;
           }
@@ -202,54 +216,6 @@ const submitData = async () => {
             font-size: 5vh;
           }
         }
-      }
-    }
-  }
-
-
-  .designLG {
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 50%;
-    justify-content: space-between;
-    align-items: flex-end;
-
-    @media (min-width: 600px) {
-      .blueTriangle {
-        height: 100%;
-        width: 18%;
-      }
-
-      .littleStar {
-        position: relative;
-        left: 30%;
-        bottom: 35%;
-        width: 12%;
-      }
-
-      .blueSplash {
-        height: 85%;
-        width: 25%;
-      }
-    }
-
-    @media (max-width: 599px) {
-
-      .blueTriangle {
-        height: 0%;
-        width: 0%;
-      }
-
-      .littleStar {
-        bottom: 0%;
-        width: 0%;
-      }
-
-      .blueSplash {
-        height: 0%;
-        width: 0%;
       }
     }
   }

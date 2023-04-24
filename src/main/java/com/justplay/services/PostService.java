@@ -70,7 +70,4 @@ public class PostService implements BaseService<Post> {
         post.setProfile(postDetails.getProfile());
         return save(post);
     }
-
-    
-    
 }

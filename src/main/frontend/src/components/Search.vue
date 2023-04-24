@@ -38,7 +38,6 @@ function filterList() {
 </template>
 
 <style lang="scss" scoped>
-@use "@/scss/colors" as c;
 
 .searcher {
   background-color: map-get(c.$colors, "light-purple");

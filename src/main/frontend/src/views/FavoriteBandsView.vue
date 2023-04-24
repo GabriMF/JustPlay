@@ -11,7 +11,6 @@ import CardUsers from '../components/CardUsers.vue';
 </main>
 </template>
 <style lang="scss">
-@use "@/scss/colors" as c;
 @use "@/scss/fonts";
 
 main{

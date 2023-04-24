@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 import Header from '../components/Header.vue';
-import UserFeed from '../components/UserFeed.vue';
-import AddPublication from '../components/AddPublication.vue';
-import Search from '../components/Search.vue'
+// import UserFeed from '../components/UserFeed.vue';
+// import AddPublication from '../components/AddPublication.vue';
+// import Search from '../components/Search.vue'
 import PostService from '../services/PostService';
 import CardProfile from '../components/CardProfile.vue';
 import bannerComp from '../components/BannerComp.vue';
@@ -24,10 +24,6 @@ onBeforeMount(async () => {
     <main>
         <Header />
         <bannerComp />
-        <!-- <UserFeed />
-        <div class="tools">
-            <Search />
-        </div>-->
         <div class="publi">
             <CardProfile v-for="post in posts" :post="post" />
         </div>
@@ -35,7 +31,6 @@ onBeforeMount(async () => {
 </template>
 
 <style lang="scss" scoped>
-@use "@/scss/colors" as c;
 
 main {
     margin: 0 auto;
@@ -63,7 +58,7 @@ main {
             align-self: start;
 
             .modal {
-                background: map-get(c.$colors, "white");
+                background: white;
                 display: flex;
                 border: 2px solid black;
                 width: 100%;

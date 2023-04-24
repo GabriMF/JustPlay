@@ -9,7 +9,7 @@ const logout = async () => {
 </script>
 <template>
   <div class="header">
-    <a href="/" aria-current="page" class="logo">
+    <a href="/home" aria-current="page" class="logo">
       <img class="logoImg" src="../assets/images/justPlayLogo.png" alt="">
     </a>
     <div class="slogan">
@@ -18,7 +18,7 @@ const logout = async () => {
 
     <div class="menuContainer">
       <nav role="navigation" class="menuNav">
-        <router-link to="/" class="nav-bar__link" href="">
+        <router-link to="/home" class="nav-bar__link" href="">
           Home
         </router-link>
         <router-link to="/myEvents" class="nav-bar__link" href="">
@@ -27,7 +27,7 @@ const logout = async () => {
         <router-link to="/favoriteBands" class="nav-bar__link" href="">
           Favorite Bands
         </router-link>
-        <router-link @click="logout" to="/login" href="">
+        <router-link @click="logout" to="/" href="">
           Log Out
         </router-link>
       </nav>
@@ -36,9 +36,9 @@ const logout = async () => {
         <input type="checkbox" id="menu" />
         <label for="menu"> ☰ </label>
         <ul>
-          <router-link to="/ProfileUser" class="nav-bar__link" href="">Mis Publicaciones</router-link>
-          <router-link to="/MisContactos" class="nav-bar__link" href="">Mis Contactos</router-link>
-          <router-link to="/ElMuro" class="navLink" href="">El Muro</router-link>
+          <router-link to="/myEvents" class="nav-bar__link" href="">My Events</router-link>
+          <router-link to="/favoriteBands" class="nav-bar__link" href="">Favorite Bands</router-link>
+          <!-- <router-link to="/ElMuro" class="navLink" href="">El Muro</router-link> -->
           <router-link @click="logout" to="/" href="">LogOut</router-link>
         </ul>
       </nav>
@@ -46,7 +46,6 @@ const logout = async () => {
   </div>
 </template>
 <style lang="scss" scoped>
-@use "@/scss/colors" as c;
 @use "@/scss/mixins" as m;
 @use "@/scss/fonts";
 
@@ -125,7 +124,7 @@ const logout = async () => {
         label {
           box-sizing: border-box;
           display: inline-block;
-          background: map-get(c.$colors, "light-orange");
+          background: #FED2C0;
           border-radius: 5px;
           width: 30px;
           height: 30px;

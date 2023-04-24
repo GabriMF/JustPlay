@@ -7,7 +7,7 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/login',
+      path: '/',
       name: 'login',
       component: LogInView
     },
@@ -23,7 +23,7 @@ const router = createRouter({
       component: () => import('../views/MyEventsView.vue')
     },
     {
-      path: '/',
+      path: '/home',
       name: 'home',
       component: () => import('../views/HomeView.vue')
 
@@ -33,17 +33,6 @@ const router = createRouter({
       name: 'favoriteBands',
       component: () => import('../views/FavoriteBandsView.vue')
     },
-    {
-      path:'/MuroAdmin',
-      name: 'MuroAdmin',
-      component: () => import('../views/MuroAdminView.vue')
-    },
-    {
-      path:'/UsersAdmin',
-      name: 'UsersAdmin',
-      component: () => import('../views/UsersAdminView.vue')   
-    },
-    
    ]
 })
 

@@ -13,7 +13,7 @@ import LogInComp from '../components/LogInComp.vue'
 
 <style scoped lang="scss">
 .main {
-    background-color: #FF4700;
+    background-color: rgb(56, 56, 56);
     width: 100vw;
     height: 100vh;
 }

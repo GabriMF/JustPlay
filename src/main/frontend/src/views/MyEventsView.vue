@@ -57,12 +57,10 @@ function cardModal() {
 		<div class="publi">
 			<CardProfile v-for="post in posts" :post="post" />
 		</div>
-
 	</main>
 </template>
 
 <style lang="scss" scoped>
-@use "@/scss/colors" as c;
 @use "@/scss/fonts";
 
 .title {
@@ -75,7 +73,7 @@ function cardModal() {
 
 	.text {
 		font-size: xx-large;
-		color: map-get(c.$colors, "black");
+		color: black;
 		font-family: "Open Sans", sans-serif;
 		font-weight: bold;
 	}
@@ -85,7 +83,7 @@ function cardModal() {
 		align-items: center;
 
 		.modal {
-			background: map-get(c.$colors, "white");
+			background: white;
 			display: flex;
 			margin-left: 5vw;
 			width: 5vw;
@@ -94,6 +92,12 @@ function cardModal() {
 			background-color: #d7d7d7;
 			color: black;
 			height: 2em;
+			&:hover{
+				background-color: #a7a7a7;
+			}
+			&:active{
+				background-color: #555555;
+			}
 		}
 	}
 

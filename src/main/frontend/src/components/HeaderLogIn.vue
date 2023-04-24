@@ -6,7 +6,6 @@
 </template>
 
 <style lang="scss">
-@use "@/scss/colors" as c;
 @use "@/scss/mixins" as m;
 
 .headerLogin {
@@ -18,10 +17,10 @@
   height: 5rem;
   -webkit-box-pack: center;
   justify-content: center;
-  background-color: map-get(c.$colors, "light-orange");
+  background-color: rgb(177, 5, 5);
 
   .headerLogo {
-    background-image: url("https://uploads-ssl.webflow.com/62e2b7b9c42bdda27c83d493/6329c1bc9e1976ae0ada64b0_somos-f5.svg");
+    background-image: url("../assets/images/justPlayLogo.png");
     background-size: contain;
     background-position: 0% 50%;
     background-repeat: no-repeat;
